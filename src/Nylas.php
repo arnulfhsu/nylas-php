@@ -77,7 +77,7 @@ class Nylas
         $payload                            = array();
         $payload['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
         $payload['headers']['Accept']       = 'text/plain';
-        $payload['body']                    = $args;
+        $payload['form_params']             = $args;
 
         $response = $this->apiClient->post($url, $payload)->json();
 
@@ -206,7 +206,7 @@ class Nylas
         $payload = $this->createHeaders();
         if ($klass->collectionName == 'files') {
             $payload['headers']['Content-Type'] = 'multipart/form-data';
-            $payload['body']                    = $data;
+            $payload['form_params']             = $data;
         } else {
             $payload['headers']['Content-Type'] = 'application/json';
             $payload['json']                    = $data;
