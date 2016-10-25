@@ -223,7 +223,7 @@ class Nylas
 
         if ($klass->collectionName == 'files') {
             $payload['headers']['Content-Type'] = 'multipart/form-data';
-            $payload['body']                    = $data;
+            $payload['form_params']             = $data;
         } else {
             $payload         = $this->createHeaders();
             $payload['json'] = $data;
