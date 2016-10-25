@@ -47,7 +47,7 @@ class Nylas
 
     private function createApiClient()
     {
-        return new GuzzleClient(['base_url' => $this->apiServer]);
+        return new GuzzleClient(['base_uri' => $this->apiServer]);
     }
 
     public function createAuthURL($redirect_uri, $login_hint = null)
