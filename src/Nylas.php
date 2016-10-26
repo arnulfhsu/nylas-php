@@ -79,8 +79,8 @@ class Nylas
         $payload['headers']['Accept'] = 'text/plain';
         $payload['form_params'] = $args;
 
-        $response = $this->apiClient->post($url, $payload)->getBody()->getContents();
-        $response = json_decode($response, true);
+        $responseJson = $this->apiClient->post($url, $payload)->getBody()->getContents();
+        $response = json_decode($responseJson, true);
 
         if (array_key_exists('access_token', $response)) {
             $this->apiToken = $response['access_token'];
@@ -164,8 +164,8 @@ class Nylas
         $suffix = ($namespace) ? '/' . $klass->apiRoot . '/' . $namespace : '';
         $url = $this->apiServer . $suffix . '/' . $klass->collectionName;
         $url = $url . '?' . http_build_query($filter);
-        $data = $this->apiClient->get($url, $this->createHeaders())->getBody()->getContents();
-        $data = json_decode($data, true);
+        $dataJson = $this->apiClient->get($url, $this->createHeaders())->getBody()->getContents();
+        $data = json_decode($dataJson, true);
 
         $mapped = [];
         foreach ($data as $i) {
@@ -205,8 +205,8 @@ class Nylas
         $postfix = ($extra) ? '/' . $extra : '';
         $url = $this->apiServer . $prefix . '/' . $klass->collectionName . '/' . $id . $postfix;
         $url = $url . '?' . http_build_query($filters);
-        $data = $this->apiClient->get($url, $this->createHeaders())->getBody()->getContents();
-        $data = json_decode($data, true);
+        $dataJson = $this->apiClient->get($url, $this->createHeaders())->getBody()->getContents();
+        $data = json_decode($dataJson, true);
 
         return $data;
     }
@@ -247,8 +247,8 @@ class Nylas
             $payload['json'] = $data;
         }
 
-        $response = $this->apiClient->post($url, $payload)->getBody()->getContents();
-        $response = json_decode($response, true);
+        $responseJson = $this->apiClient->post($url, $payload)->getBody()->getContents();
+        $response = json_decode($responseJson, true);
 
         return $klass->_createObject($this, $namespace, $response);
     }
@@ -271,8 +271,8 @@ class Nylas
         } else {
             $payload = $this->createHeaders();
             $payload['json'] = $data;
-            $response = $this->apiClient->put($url, $payload)->getBody()->getContents();
-            $response = json_decode($response, true);
+            $responseJson = $this->apiClient->put($url, $payload)->getBody()->getContents();
+            $response = json_decode($responseJson, true);
 
             return $klass->_createObject($this, $namespace, $response);
         }
@@ -290,8 +290,8 @@ class Nylas
         $url = $this->apiServer . $prefix . '/' . $klass->collectionName . '/' . $id;
 
         $payload = $this->createHeaders();
-        $response = $this->apiClient->delete($url, $payload)->getBody()->getContents();
-        $response = json_decode($response, true);
+        $responseJson = $this->apiClient->delete($url, $payload)->getBody()->getContents();
+        $response = json_decode($responseJson, true);
 
         return $response;
     }
